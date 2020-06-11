@@ -6,8 +6,6 @@ package com.zs.gateway.chains;
 
 import com.zs.gateway.bean.vo.RequestVO;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.chain.Command;
-import org.apache.commons.chain.Context;
 
 /**
  * @author zhousheng

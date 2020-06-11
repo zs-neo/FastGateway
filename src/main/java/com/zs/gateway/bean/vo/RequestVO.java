@@ -7,6 +7,8 @@ package com.zs.gateway.bean.vo;
 import lombok.Data;
 import org.apache.commons.chain.impl.ContextBase;
 
+import java.util.Map;
+
 /**
  * @author zhousheng
  * @version 1.0
@@ -20,6 +22,8 @@ public class RequestVO extends ContextBase {
 	String methodName;
 	String signature;
 	String param;
+	
+	Map<String,String> params;
 	
 	
 }
