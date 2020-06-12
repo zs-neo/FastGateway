@@ -15,8 +15,8 @@ import java.util.Map;
 
 /**
  * @author zhousheng
- * @see https://www.jianshu.com/p/ff8281f034f4
  * @version 1.0
+ * @see https://www.jianshu.com/p/ff8281f034f4
  * @since 2020/6/9 21:32
  */
 public class RSAUtils {
@@ -96,6 +96,10 @@ public class RSAUtils {
 		Cipher cipher = Cipher.getInstance(keyFactory.getAlgorithm());
 		cipher.init(Cipher.DECRYPT_MODE, privateKey);
 		return cipher.doFinal(data);
+	}
+	
+	public static byte[] decryptByPrivateKey(String data) throws Exception {
+		return decryptByPrivateKey(data, PRIVATE_KEY);
 	}
 	
 	/**

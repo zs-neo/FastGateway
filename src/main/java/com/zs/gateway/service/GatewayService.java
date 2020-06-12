@@ -4,6 +4,7 @@
  */
 package com.zs.gateway.service;
 
+import com.zs.gateway.bean.Result;
 import com.zs.gateway.bean.vo.RequestVO;
 
 /**
@@ -13,6 +14,6 @@ import com.zs.gateway.bean.vo.RequestVO;
  */
 public interface GatewayService {
 	
-	String processRequest(RequestVO requestVO);
+	Result<String> processRequest(RequestVO requestVO);
 	
 }

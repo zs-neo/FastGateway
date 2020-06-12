@@ -4,9 +4,11 @@
  */
 package com.zs.gateway.bean.vo;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 import org.apache.commons.chain.impl.ContextBase;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -14,16 +16,21 @@ import java.util.Map;
  * @version 1.0
  * @since 2020/6/11 15:11
  */
+@Data
 public class RequestVO extends ContextBase {
 	
-	String version;
-	String systemName;
-	String interfaceName;
-	String methodName;
-	String signature;
-	String param;
+	private HttpServletRequest request;
+	private String clientIP;
+	private Map<String, String> requestParams;
+	private Map<String, String> dataParams;
 	
-	Map<String,String> params;
-	
+	private Integer code;
+	private String msg;
+	private String data;
+	private String sign;
+	/**
+	 * 是否被限流
+	 */
+	private Boolean limit;
 	
 }

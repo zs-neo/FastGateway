@@ -17,6 +17,7 @@ public class ApiInfoCheckHandler extends Handler {
 	
 	@Override
 	public boolean execute(RequestVO requestVO) {
+		
 		log.info("api info ckecking");
 		return false;
 	}

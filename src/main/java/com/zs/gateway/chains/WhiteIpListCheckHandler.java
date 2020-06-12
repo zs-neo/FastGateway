@@ -17,6 +17,7 @@ public class WhiteIpListCheckHandler extends Handler {
 	
 	@Override
 	public boolean execute(RequestVO requestVO) {
+		// 白名单校验，目前暂不做处理，白名单是个啥呀???
 		log.info("white list checking...");
 		return false;
 	}

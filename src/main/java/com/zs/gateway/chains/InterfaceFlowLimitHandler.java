@@ -5,7 +5,10 @@
 package com.zs.gateway.chains;
 
 import com.zs.gateway.bean.vo.RequestVO;
+import com.zs.gateway.support.IPGuavaTokenBucket;
 import lombok.extern.log4j.Log4j2;
+
+import javax.annotation.Resource;
 
 /**
  * @author zhousheng
@@ -15,10 +18,20 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class InterfaceFlowLimitHandler extends Handler {
 	
+	@Resource
+	private IPGuavaTokenBucket tokenBucket;
+	
 	@Override
 	public boolean execute(RequestVO requestVO) {
 		log.info("interface flow limitting...");
-		return false;
+		String clientIP = requestVO.getClientIP();
+		if (tokenBucket.allow()) {
+			log.info("clientIp {} success in flow control", clientIP);
+			return false;
+		}
+		requestVO.setLimit(true);
+		log.info("clientIp {} fail in flow control", clientIP);
+		return true;
 	}
 	
 }
