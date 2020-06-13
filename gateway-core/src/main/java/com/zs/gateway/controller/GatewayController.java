@@ -18,8 +18,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static com.zs.gateway.enums.Constant.*;
 
@@ -47,7 +46,7 @@ public class GatewayController {
 	 * @param request       请求
 	 * @return
 	 */
-	@ApiOperation(value = "获取Api文档信息", notes = "根据条件查询Api文档信息")
+	@ApiOperation(value = "网关请求入口", notes = "网关请求入口")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "version", value = "接口版本", required = false, dataType = "String"),
 			@ApiImplicitParam(name = "biz", value = "系统名称", required = false, dataType = "String"),

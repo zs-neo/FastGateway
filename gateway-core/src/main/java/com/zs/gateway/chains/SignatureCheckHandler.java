@@ -23,9 +23,9 @@ import java.util.Map;
 public class SignatureCheckHandler extends Handler {
 	
 	/**
-	 * 接口防刷，保证接口安全，但因为有sign的存在不保证数据安全。可以用两对公私钥保证接口及数据安全，在此不做实现。
+	 * 接口防刷，保证接口安全，但因为有sign的存在不保证数据安全。。
 	 * 1.客户端的请求的json串格式类似{"name":"taoeyhuang","age":18}
-	 * json直接通过base64加密，得到数字摘要sign
+	 * json直接通过base64加密，得到数字摘要sign(此处参数+secret后再做摘要处理可保证数据安全，但目前不做实现)
 	 * sign通过公钥加密得到加密data
 	 * data放到post请求的body中，sign放到post请求的请求头里
 	 * <p>
