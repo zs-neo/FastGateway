@@ -185,6 +185,10 @@ public class RSAUtils {
 		return cipher.doFinal(data);
 	}
 	
+	public static byte[] encryptByPrivateKey(byte[] data) throws Exception {
+		return encryptByPrivateKey(data, PRIVATE_KEY);
+	}
+	
 	/**
 	 * 取得私钥
 	 *

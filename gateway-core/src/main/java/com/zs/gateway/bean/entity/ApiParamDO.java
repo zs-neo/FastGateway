@@ -38,10 +38,6 @@ public class ApiParamDO {
 	 */
 	private Integer sequence;
 	/**
-	 * api的版本
-	 */
-	private Integer version;
-	/**
 	 * 创建时间
 	 */
 	private LocalDateTime createdTime;

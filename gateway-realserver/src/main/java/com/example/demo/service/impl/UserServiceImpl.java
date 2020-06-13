@@ -4,6 +4,7 @@
  */
 package com.example.demo.service.impl;
 
+import com.example.demo.bean.Result;
 import com.example.demo.bean.User;
 import com.example.demo.service.UserService;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,12 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 	
 	@Override
-	public User queryUserById(int id) {
-		return new User(1, "tom", "123456");
+	public Result<User> queryUserById(int id) {
+		User user = new User(1, "tom", "123456");
+		Result<User> result = new Result<>();
+		result.setCode(200);
+		result.setMsg("success");
+		result.setData(user);
+		return result;
 	}
 }

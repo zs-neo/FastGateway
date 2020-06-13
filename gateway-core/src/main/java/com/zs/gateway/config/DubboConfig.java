@@ -2,7 +2,7 @@
  * Author github: https://github.com/zs-neo
  * Author Email: 2931622851@qq.com
  */
-package com.example.demo.config;
+package com.zs.gateway.config;
 
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.MonitorConfig;

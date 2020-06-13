@@ -28,6 +28,8 @@ public class InterfaceFlowLimitHandler extends Handler {
 		if (tokenBucket.allow()) {
 			log.info("clientIp {} success in flow control", clientIP);
 			return false;
+		} else {
+			// 可以快速失败，做服务降级处理，或者消费mq里的消息也可以
 		}
 		requestVO.setLimit(true);
 		log.info("clientIp {} fail in flow control", clientIP);

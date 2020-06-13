@@ -4,6 +4,8 @@
  */
 package com.zs.gateway.dao;
 
+import com.zs.gateway.bean.entity.ApiDO;
+import com.zs.gateway.bean.entity.ApiParamDO;
 import com.zs.gateway.bean.entity.BWIpListDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -18,7 +20,10 @@ import java.util.List;
 @Mapper
 public interface ApiDAO {
 	
-	@Select("select * from gw_ip_bwlist where ip=#{ip}")
-	List<BWIpListDO> queryBySysAndUrl(String sys, String url);
+	@Select("select * from gw_api where code=#{code}")
+	ApiDO queryByCode(String code);
+	
+	@Select("select * from gw_api where code=#{code}")
+	List<ApiParamDO> queryParamsById(int id);
 	
 }

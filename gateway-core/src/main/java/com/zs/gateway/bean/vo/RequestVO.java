@@ -5,6 +5,7 @@
 package com.zs.gateway.bean.vo;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zs.gateway.bean.entity.ApiDO;
 import lombok.Data;
 import org.apache.commons.chain.impl.ContextBase;
 
@@ -24,13 +25,16 @@ public class RequestVO extends ContextBase {
 	private Map<String, String> requestParams;
 	private Map<String, String> dataParams;
 	
+	private String[] paramTypes;
+	private Object[] params;
+	private ApiDO apiDO;
+	private String interfaceClass;
+	private String method;
+	
 	private Integer code;
 	private String msg;
 	private String data;
 	private String sign;
-	/**
-	 * 是否被限流
-	 */
 	private Boolean limit;
 	
 }

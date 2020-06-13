@@ -4,6 +4,7 @@
  */
 package com.example.demo.service;
 
+import com.example.demo.bean.Result;
 import com.example.demo.bean.User;
 
 import java.util.List;
@@ -15,6 +16,6 @@ import java.util.List;
  */
 public interface UserService {
 	
-	User queryUserById(int id);
+	Result<User> queryUserById(int id);
 	
 }
