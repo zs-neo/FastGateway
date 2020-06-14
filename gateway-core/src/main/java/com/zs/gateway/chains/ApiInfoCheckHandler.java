@@ -29,12 +29,14 @@ public class ApiInfoCheckHandler extends Handler {
 	
 	@Override
 	public boolean execute(RequestVO requestVO) {
+		log.info("step 5 : api info ckecking...");
 		String code = requestVO.getDataParams().get("code");
 		if (code == null) {
 			// 没有code说明是HTTP请求,放行到invoke去
 			return false;
 		}
 		// 对于rpc的请求,此对象可以缓存
+		// TODO 缓存api信息
 		ApiDO apiDO = apiManager.queryByCode(code);
 		List<ApiParamDO> apiParams = apiManager.queryParamsById(apiDO.getId());
 		String[] paramTypes = new String[apiParams.size()];
@@ -57,7 +59,6 @@ public class ApiInfoCheckHandler extends Handler {
 		requestVO.setParams(params);
 		requestVO.setMethod(apiDO.getMethod());
 		requestVO.setInterfaceClass(apiDO.getName());
-		log.info("api info ckecking");
 		return false;
 	}
 }

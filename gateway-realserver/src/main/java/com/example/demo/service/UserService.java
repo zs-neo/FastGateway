@@ -16,6 +16,6 @@ import java.util.List;
  */
 public interface UserService {
 	
-	Result<User> queryUserById(int id);
+	Result<User> queryUserById(int id, String code);
 	
 }

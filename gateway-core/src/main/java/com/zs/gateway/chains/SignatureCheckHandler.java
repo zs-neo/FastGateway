@@ -39,13 +39,13 @@ public class SignatureCheckHandler extends Handler {
 	 */
 	@Override
 	public boolean execute(RequestVO requestVO) {
-		log.info("signature checking...");
+		log.info("step 4 : signature checking...");
 		String data = requestVO.getData();
 		String sign = requestVO.getSign();
 		JSONObject requestBodyData;
 		try {
 			// RSA私钥解密
-			byte[] reqSign = RSAUtils.decryptByPrivateKey(data);
+			byte[] reqSign = RSAUtils.decryptByPrivateKey("","");
 			if (reqSign == null) {
 				log.warn("request sign of param is null");
 				return true;

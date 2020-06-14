@@ -30,6 +30,7 @@ public class InvokeInterfaceHandler extends Handler {
 	
 	@Override
 	public boolean execute(RequestVO requestVO) {
+		log.info("step 6 : interface invoking...");
 		String[] paramTypes = requestVO.getParamTypes();
 		Object[] params = requestVO.getParams();
 		String interfaceClass = requestVO.getApiDO().getName();
@@ -44,7 +45,6 @@ public class InvokeInterfaceHandler extends Handler {
 			e.printStackTrace();
 			return true;
 		}
-		log.info("interface invoking...");
 		return false;
 	}
 }

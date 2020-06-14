@@ -19,17 +19,17 @@ public class EncodeResponseHandler extends Handler {
 	
 	@Override
 	public boolean execute(RequestVO requestVO) {
+		log.info("step 7 : encode response...");
 		String data = requestVO.getData();
 		try {
 			String dataSign = RSAUtils.encryptBASE64(data.getBytes());
-			data = RSAUtils.encryptByPrivateKey(dataSign.getBytes()).toString();
+//			data = RSAUtils.encryptByPrivateKey(dataSign.getBytes()).toString();
 			requestVO.setData(data);
 		} catch (Exception e) {
 			log.warn("encode response error");
 			e.printStackTrace();
 			return true;
 		}
-		log.info("encode response...");
 		return false;
 	}
 }

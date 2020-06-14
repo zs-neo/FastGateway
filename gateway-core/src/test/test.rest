@@ -1,0 +1,16 @@
+GET http://localhost:8081/user/login?username=123&password=123
+Content-Type: application/json
+Accept: application/json
+
+###
+POST http://localhost:8080/v1/usersystem/user/login?sig=123
+Content-Type: application/json
+Accept: application/json
+
+{
+  "code": "123123",
+  "username": "tom",
+  "password": "123456"
+}
+
+###

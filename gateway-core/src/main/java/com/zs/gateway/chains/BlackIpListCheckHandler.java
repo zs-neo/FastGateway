@@ -25,14 +25,21 @@ public class BlackIpListCheckHandler extends Handler {
 	
 	@Override
 	public boolean execute(RequestVO requestVO) {
-		log.info("black list checking...");
+		log.info("step 2 : black list checking...");
 		String clientIp = requestVO.getClientIP();
-		List<BWIpListDO> ipDO = ipDao.queryByIp(clientIp);
-		if (ipDO == null || ipDO.get(0).getIsBlack().equals(0)) {
-			return false;
-		} else {
-			log.warn("ip {} in black list , refused", clientIp);
-			return true;
+		try {
+			List<BWIpListDO> ipDO = ipDao.queryByIp(clientIp);
+			if (ipDO == null || ipDO.size() == 0 || ipDO.get(0).getIsBlack().equals(0)) {
+				log.info("clientIp {} success in black list  control", clientIp);
+				return false;
+			} else {
+				log.warn("ip {} in black list , refused", clientIp);
+				return true;
+			}
+		} catch (Exception e) {
+			log.warn("error in black list check", clientIp);
+			e.printStackTrace();
 		}
+		return true;
 	}
 }

@@ -1,7 +1,3 @@
-/*
- * Author github: https://github.com/zs-neo
- * Author Email: 2931622851@qq.com
- */
 package com.zs.gateway.utils;
 
 import org.apache.commons.codec.binary.Base64;
@@ -14,10 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author zhousheng
- * @version 1.0
- * @see https://www.jianshu.com/p/ff8281f034f4
- * @since 2020/6/9 21:32
+ * Created by lake on 17-4-12.
  */
 public class RSAUtils {
 	
@@ -96,10 +89,6 @@ public class RSAUtils {
 		Cipher cipher = Cipher.getInstance(keyFactory.getAlgorithm());
 		cipher.init(Cipher.DECRYPT_MODE, privateKey);
 		return cipher.doFinal(data);
-	}
-	
-	public static byte[] decryptByPrivateKey(String data) throws Exception {
-		return decryptByPrivateKey(data, PRIVATE_KEY);
 	}
 	
 	/**
@@ -185,10 +174,6 @@ public class RSAUtils {
 		return cipher.doFinal(data);
 	}
 	
-	public static byte[] encryptByPrivateKey(byte[] data) throws Exception {
-		return encryptByPrivateKey(data, PRIVATE_KEY);
-	}
-	
 	/**
 	 * 取得私钥
 	 *
@@ -227,8 +212,21 @@ public class RSAUtils {
 		keyPairGen.initialize(1024);
 		KeyPair keyPair = keyPairGen.generateKeyPair();
 		Map<String, Key> keyMap = new HashMap(2);
-		keyMap.put(PUBLIC_KEY, keyPair.getPublic());// 公钥
-		keyMap.put(PRIVATE_KEY, keyPair.getPrivate());// 私钥
+		keyMap.put(PUBLIC_KEY, keyPair.getPublic());
+		keyMap.put(PRIVATE_KEY, keyPair.getPrivate());
 		return keyMap;
 	}
+	
+	private static String publicKey;
+	private static String privateKey;
+	
+	public void setUp() throws Exception {
+		Map<String, Key> keyMap = RSAUtils.initKey();
+		publicKey = RSAUtils.getPublicKey(keyMap);
+		privateKey = RSAUtils.getPrivateKey(keyMap);
+		System.err.println("公钥: \n\r" + publicKey);
+		System.err.println("私钥： \n\r" + privateKey);
+	}
+	
+	
 }

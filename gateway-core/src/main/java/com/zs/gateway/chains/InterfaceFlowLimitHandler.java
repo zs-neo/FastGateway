@@ -23,7 +23,7 @@ public class InterfaceFlowLimitHandler extends Handler {
 	
 	@Override
 	public boolean execute(RequestVO requestVO) {
-		log.info("interface flow limitting...");
+		log.info("step 1 : interface flow limitting...");
 		String clientIP = requestVO.getClientIP();
 		if (tokenBucket.allow()) {
 			log.info("clientIp {} success in flow control", clientIP);
