@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
+import static java.lang.Thread.currentThread;
+
 /**
  * 令牌桶算法
  * - 相比漏桶算法而言区别在于，令牌桶是会去匀速的生成令牌，拿到令牌才能够进行处理，类似于匀速往桶里放令牌
