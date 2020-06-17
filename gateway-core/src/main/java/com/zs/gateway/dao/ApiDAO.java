@@ -23,7 +23,7 @@ public interface ApiDAO {
 	@Select("select * from gw_api where code=#{code}")
 	ApiDO queryByCode(String code);
 	
-	@Select("select * from gw_api where code=#{code}")
+	@Select("select * from gw_api_param where api_id=#{id}")
 	List<ApiParamDO> queryParamsById(int id);
 	
 }

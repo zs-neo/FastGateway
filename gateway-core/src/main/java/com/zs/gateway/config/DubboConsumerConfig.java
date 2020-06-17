@@ -5,6 +5,7 @@
 package com.zs.gateway.config;
 
 import com.alibaba.dubbo.config.ConsumerConfig;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -15,10 +16,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DubboConsumerConfig extends DubboConfig {
 	
-	private ConsumerConfig getConsumerConfig() {
+	@Bean
+	public ConsumerConfig consumerConfig() {
 		ConsumerConfig consumerConfig = new ConsumerConfig();
-		consumerConfig.setTimeout(5000);
-		consumerConfig.setRetries(2);
+		consumerConfig.setMonitor(monitorConfig());
 		return consumerConfig;
 	}
 	

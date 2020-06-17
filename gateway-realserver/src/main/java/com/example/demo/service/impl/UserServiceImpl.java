@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 	
 	@Override
-	public Result<User> queryUserById(int id,String code) {
+	public Result<User> queryUser(String username, String password) {
 		User user = new User(1, "tom", "123456");
 		Result<User> result = new Result<>();
 		result.setCode(200);

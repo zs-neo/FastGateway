@@ -36,6 +36,7 @@ public class GatewayServiceImpl implements GatewayService {
 			return result;
 		} catch (Exception e) {
 			log.warn("error in chain!");
+			e.printStackTrace();
 		}
 		return null;
 	}

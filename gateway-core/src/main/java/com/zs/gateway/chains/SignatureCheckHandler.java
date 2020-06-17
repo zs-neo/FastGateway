@@ -9,7 +9,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.zs.gateway.bean.vo.RequestVO;
 import com.zs.gateway.utils.RSAUtils;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.StringUtils;
 
+import java.security.Key;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -21,6 +25,27 @@ import java.util.Map;
  */
 @Log4j2
 public class SignatureCheckHandler extends Handler {
+	
+	public static Map<String, Key> keyMap;
+	
+	private static String publicKey;
+	private static String privateKey;
+	
+	public SignatureCheckHandler() {
+		try {
+			if (StringUtils.isEmpty(publicKey) || StringUtils.isEmpty(privateKey)) {
+				synchronized (this) {
+					keyMap = RSAUtils.initKey();
+					publicKey = RSAUtils.getPublicKey(keyMap);
+					privateKey = RSAUtils.getPrivateKey(keyMap);
+				}
+			}
+			log.info("公钥: \n\r" + publicKey);
+			log.info("私钥： \n\r" + privateKey);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * 接口防刷，保证接口安全，但因为有sign的存在不保证数据安全。。
@@ -40,19 +65,26 @@ public class SignatureCheckHandler extends Handler {
 	@Override
 	public boolean execute(RequestVO requestVO) {
 		log.info("step 4 : signature checking...");
-		String data = requestVO.getData();
-		String sign = requestVO.getSign();
+		String data = requestVO.getRequestParams().get("param");
+		String sign = requestVO.getRequestParams().get("signature");
+		log.info("签名: " + sign);
+		log.info("加密body数据: " + data);
 		JSONObject requestBodyData;
 		try {
 			// RSA私钥解密
-			byte[] reqSign = RSAUtils.decryptByPrivateKey("","");
+			byte[] reqSign = RSAUtils.decryptByPrivateKey(data, RSAUtils.getPrivateKey(keyMap));
 			if (reqSign == null) {
 				log.warn("request sign of param is null");
 				return true;
 			}
-			// base64解密
-			String reqSingnStr = RSAUtils.decryptBASE64(reqSign.toString()).toString();
-			if (sign.equals(reqSingnStr)) {
+			// 验签
+			log.info("sign: " + sign);
+			log.info("reSi: " + new String(reqSign));
+			if (sign.equals(new String(reqSign))) {
+				// base64解密
+				String reqSingnStr = new String(Base64.decodeBase64(reqSign));
+				log.info("request decode base64: " + reqSingnStr);
+				// 提取参数
 				Map<String, String> bodyParams = new HashMap<>();
 				requestBodyData = JSON.parseObject(reqSingnStr);
 				Iterator<String> it = requestBodyData.keySet().iterator();
@@ -62,6 +94,7 @@ public class SignatureCheckHandler extends Handler {
 					bodyParams.put(key, value);
 				}
 				requestVO.setDataParams(bodyParams);
+				log.info("request body: " + JSON.toJSONString(bodyParams));
 				return false;
 			} else {
 				log.warn("request sign of param error dangerously");

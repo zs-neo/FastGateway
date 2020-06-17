@@ -4,6 +4,7 @@
  */
 package com.zs.gateway.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zs.gateway.bean.Result;
 import com.zs.gateway.bean.vo.RequestVO;
 import com.zs.gateway.enums.CodeMsg;
@@ -59,12 +60,12 @@ public class GatewayController {
 									   @PathVariable("biz") String systemName,
 									   @PathVariable("interfaceName") String interfaceName,
 									   @PathVariable("methodName") String methodName,
-									   @RequestParam("sig") String signature,
 									   @RequestBody String param,
 									   HttpServletRequest request) {
+		JSONObject jsonObject = JSONObject.parseObject(param);
 		log.info("接收到请求, urlPath: {}", request.getServletPath());
 		log.info("request version: {}, sys: {}, api: {}, method: {}, sig: {}, param: {}",
-				version, systemName, interfaceName, methodName, signature, param);
+				version, systemName, interfaceName, methodName,jsonObject.getString("sign"), jsonObject.getString("data"));
 		
 		RequestVO requestVO = new RequestVO();
 		
@@ -73,8 +74,8 @@ public class GatewayController {
 		params.put(SYS, systemName);
 		params.put(INTERFACENAME, interfaceName);
 		params.put(METHODNAME, methodName);
-		params.put(SIGNATURE, signature);
-		params.put(PARAM, param);
+		params.put(SIGNATURE, jsonObject.getString("sign"));
+		params.put(PARAM, jsonObject.getString("data"));
 		params.put(URL, request.getServletPath());
 		requestVO.setRequestParams(params);
 		
