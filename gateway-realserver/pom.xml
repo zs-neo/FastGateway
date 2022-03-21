@@ -23,7 +23,7 @@
         <fastjson.version>1.2.51</fastjson.version>
         <commons-chain.version>1.2</commons-chain.version>
         <commons-collections4.version>4.4</commons-collections4.version>
-        <dubbo.version>2.5.4</dubbo.version>
+        <dubbo.version>2.6.9</dubbo.version>
         <zkclient.version>0.11</zkclient.version>
     </properties>
 
